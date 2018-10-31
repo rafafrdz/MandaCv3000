@@ -11,20 +11,21 @@ from tkinter import *
 def enviar():
     msg = MIMEMultipart()
     #parametros
-    password = "rafa680828790"
-    msg['From'] = "rafafrdz0@gmail.com"
+    password = "password" #aqui poner la contraseña
+    msg['From'] = "miemail@gmail.com" #aqui cambiar el email de origen
     msg['To'] = email_cuadro.get()
     msg['Subject'] = 'Practicas/empleo'
 
     name= name_cuadro.get()
     empresa = empresa_cuadro.get()
+    #Este va a ser el mensaje plantilla que se vaya a enviar por email
     msj = "Buenos dias, mi nombre es {0} y le escribo por el siguiente asunto:\n".format(name) +"\n" +"Soy graduado en Matemáticas por la universidad de Málaga. He visto su empresa {0}, me he informado acerca del sector al que pertenecéis, del trabajo que realizáis y estoy bastante interesado y entusiasmado en formar parte de ella. Me gustaría saber si disponéis de alguna vacante adecuada a mi formación o a los intereses que os pueda generar.".format(empresa)+"\n"+"\n"+"Gracias, un cordiar saludo" + "\n" +name
     mensaje = msj
 
     #añade el mensaje al cuerpo del correo
     msg.attach(MIMEText(mensaje,'plain'))
     #añade archivo al correo
-    pdf = MIMEApplication(open("data/cv.pdf","rb").read())
+    pdf = MIMEApplication(open("data/cv.pdf","rb").read()) #aquí busca y adjunta el archivo cv.pdf dentro de la carpeta data, si se quiere modificar la dirección tan sólo hay que modificar "data/cv.pdf" por la nueva dirección y el nombre del archivo con su extensión
     pdf.add_header('Content-Disposition', 'arrachment', filename="cv.pdf")
     msg.attach(pdf)
 
